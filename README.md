@@ -1,240 +1,422 @@
 # Ayurveda Sanskrit LLM
 
-A research project developing a prototype AI system that extracts treatment information from classical Sanskrit Ayurvedic texts and maps it with symptoms and disease ontology using a Retrieval-Augmented Generation (RAG) pipeline.
+A research project developing a prototype AI system that extracts treatment knowledge from classical Sanskrit Ayurvedic texts and maps it to diseases and symptoms using a Retrieval-Augmented Generation (RAG) pipeline.
 
-## System Architecture
+The goal is to bridge classical Ayurvedic knowledge with modern AI systems by transforming Sanskrit medical literature into a structured knowledge base that supports symptom-based treatment retrieval and conversational AI applications.
 
-The system implements a complete NLP pipeline for Sanskrit Ayurvedic text processing:
+This project is part of ongoing research in AI for Traditional Medicine and Sanskrit NLP.
 
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                        AYURVEDA SANSKRIT LLM PIPELINE                       │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                             │
-│  1. SANSKRIT TEXT INGESTION                                                │
-│     └─> Load raw Sanskrit texts from data/raw_texts/                       │
-│                                                                             │
-│  2. NLP PREPROCESSING                                                       │
-│     └─> Tokenization → Transliteration → Sandhi Splitting                 │
-│                                                                             │
-│  3. SYMPTOM EXTRACTION                                                      │
-│     └─> Keyword-based extraction → Ontology mapping                        │
-│                                                                             │
-│  4. TREATMENT EXTRACTION                                                   │
-│     └─> Rule-based extraction → LLM augmentation                           │
-│                                                                             │
-│  5. DATASET MAPPING                                                        │
-│     └─> Structured JSON conversion → Schema validation                     │
-│                                                                             │
-│  6. EMBEDDING GENERATION                                                   │
-│     └─> Sanskrit-aware embeddings → Vector database indexing             │
-│                                                                             │
-│  7. RAG QUERY ENGINE                                                       │
-│     └─> Retrieval → Context assembly → LLM generation                     │
-│                                                                             │
-│  8. PRAKRITI PREDICTION (Optional)                                         │
-│     └─> Symptom features → ML classifier → Dosha prediction              │
-│                                                                             │
-└─────────────────────────────────────────────────────────────────────────────┘
-```
 
-## Repository Structure
+--------------------------------------------------
+PROJECT OBJECTIVE
+--------------------------------------------------
 
-```
+The system aims to:
+
+1. Extract treatment knowledge from Sanskrit Ayurvedic texts
+2. Map symptoms and diseases using standardized Ayurveda disease ontology
+3. Create structured datasets from classical texts
+4. Build a Retrieval-Augmented Generation (RAG) pipeline
+5. Enable LLM-based question answering
+6. Optionally predict Prakriti (Vata / Pitta / Kapha)
+
+
+--------------------------------------------------
+EXAMPLE SYSTEM OUTPUT
+--------------------------------------------------
+
+Input Symptoms:
+
+- fever
+- burning sensation
+- thirst
+
+
+Expected Output:
+
+Diagnosis:
+Pittaja Jwara
+
+Treatment:
+Guduchi decoction
+
+Evidence Source:
+Charaka Samhita – Jwara Chikitsa
+
+
+--------------------------------------------------
+SYSTEM ARCHITECTURE
+--------------------------------------------------
+
+AYURVEDA SANSKRIT LLM PIPELINE
+
+1. Sanskrit Text Ingestion
+   Load classical Ayurvedic texts
+
+2. NLP Preprocessing
+   Tokenization → Transliteration → Sandhi Splitting
+
+3. Symptom Extraction
+   Sanskrit symptom detection → Ontology mapping
+
+4. Treatment Extraction
+   Rule-based + LLM extraction from Sanskrit verses
+
+5. Dataset Construction
+   Structured JSON datasets
+
+6. Embedding Generation
+   Sanskrit-aware embeddings + vector database indexing
+
+7. RAG Query Engine
+   Retrieval → Context assembly → LLM reasoning
+
+8. Prakriti Prediction (Optional)
+   Symptom features → ML classifier → Dosha prediction
+
+
+--------------------------------------------------
+REPOSITORY STRUCTURE
+--------------------------------------------------
+
 Sanskrit-LLM/
-├── README.md                    # Project documentation
-├── requirements.txt             # Python dependencies
-├── .gitignore                   # Git ignore rules
-├── data/
-│   ├── raw_texts/              # Original Sanskrit manuscripts
-│   ├── processed_texts/        # Cleaned and tokenized text
-│   └── datasets/               # Structured extracted knowledge
-├── src/
-│   ├── sanskrit_processing/    # Text preprocessing utilities
-│   ├── treatment_extraction/  # Treatment extraction modules
-│   ├── symptom_extraction/    # Symptom extraction modules
-│   ├── dataset_mapping/       # Data transformation utilities
-│   ├── rag_pipeline/          # RAG implementation
-│   └── prakriti_prediction/    # Dosha prediction module
-├── notebooks/
-│   ├── data_exploration.ipynb    # Text analysis & visualization
-│   ├── pipeline_testing.ipynb    # End-to-end pipeline tests
-│   └── model_experiments.ipynb   # Embedding & LLM experiments
-├── experiments/
-│   ├── rag_experiments/        # RAG evaluation results
-│   └── prakriti_experiments/   # Classification experiments
-├── docs/
-│   ├── system_architecture.md   # Detailed architecture docs
-│   ├── dataset_schema.md       # Data schema definitions
-│   └── annotation_guidelines.md # Text annotation rules
-├── paper/
-│   └── paper_draft.md          # Research paper template
-├── figures/                    # Visualization assets
-└── references/                 # Related papers & resources
-```
 
-## Installation Instructions
+README.md  
+requirements.txt  
+.gitignore  
 
-### Prerequisites
-- Python 3.10+
-- Git
-- (Optional) CUDA-capable GPU for transformer models
+data/
 
-### Setup Steps
+    raw_texts/
+        Sanskrit Ayurvedic source texts
 
-```bash
-# 1. Clone the repository
+    processed_texts/
+        Cleaned and segmented Sanskrit verses
+
+    datasets/
+        disease_ontology.json
+        symptom_dataset.json
+        treatment_dataset.json
+        knowledge_base.json
+
+
+src/
+
+    sanskrit_processing/
+        text_cleaning.py
+        verse_segmentation.py
+        sandhi_splitter.py
+
+    treatment_extraction/
+        keyword_detector.py
+        treatment_extractor.py
+
+    symptom_extraction/
+        symptom_extractor.py
+
+    dataset_mapping/
+        ontology_builder.py
+        dataset_mapper.py
+
+    rag_pipeline/
+        embeddings.py
+        vector_db.py
+        rag_engine.py
+
+    prakriti_prediction/
+        feature_engineering.py
+        model_training.py
+
+
+notebooks/
+
+    data_exploration.ipynb
+    pipeline_testing.ipynb
+    model_experiments.ipynb
+
+
+experiments/
+
+    rag_experiments/
+    prakriti_experiments/
+
+
+docs/
+
+    system_architecture.md
+    dataset_schema.md
+    annotation_guidelines.md
+
+
+paper/
+
+    paper_draft.md
+
+
+figures/
+
+
+references/
+
+
+
+--------------------------------------------------
+DATASET STRUCTURE
+--------------------------------------------------
+
+Example dataset entry:
+
+{
+  "disease": "Pittaja Jwara",
+  "symptoms": ["fever", "burning sensation", "thirst"],
+  "treatment": ["Guduchi decoction"],
+  "source_text": "Charaka Samhita"
+}
+
+
+--------------------------------------------------
+PARALLEL DEVELOPMENT STRATEGY
+--------------------------------------------------
+
+To allow efficient collaboration, the project is divided into two independent pipelines.
+
+
+--------------------------------------------------
+PIPELINE A — SANSKRIT TEXT PROCESSING
+--------------------------------------------------
+
+Developer: Hemanth
+
+Responsibilities:
+
+- Collect Sanskrit Ayurvedic texts
+- Clean OCR or raw text
+- Segment texts into verses
+- Extract treatment information from verses
+
+
+Directories owned by Hemanth:
+
+data/raw_texts/  
+data/processed_texts/  
+src/sanskrit_processing/  
+src/treatment_extraction/
+
+
+Expected outputs:
+
+data/processed_texts/verses_dataset.json  
+data/datasets/treatment_dataset.json
+
+
+--------------------------------------------------
+PIPELINE B — DISEASE ONTOLOGY AND SYMPTOM MAPPING
+--------------------------------------------------
+
+Developer: Gowtham
+
+Responsibilities:
+
+- Process Ayurveda disease datasets
+- Build disease ontology
+- Create symptom datasets
+- Map symptoms to diseases
+
+
+Directories owned by Gowtham:
+
+data/datasets/  
+src/symptom_extraction/  
+src/dataset_mapping/
+
+
+Expected outputs:
+
+data/datasets/disease_ontology.json  
+data/datasets/symptom_dataset.json
+
+
+--------------------------------------------------
+FINAL INTEGRATION
+--------------------------------------------------
+
+treatment_dataset
++
+symptom_dataset
++
+disease_ontology
+
+↓
+
+knowledge_base.json
+
+This dataset powers the RAG retrieval engine.
+
+
+--------------------------------------------------
+GIT WORKFLOW
+--------------------------------------------------
+
+Branch structure:
+
+main  
+│  
+dev  
+│  
+├── feature/hemanth-text-pipeline  
+└── feature/gowtham-disease-ontology  
+
+
+Rules:
+
+Hemanth commits only to:
+
+feature/hemanth-text-pipeline
+
+
+Gowtham commits only to:
+
+feature/gowtham-disease-ontology
+
+
+Pull request flow:
+
+feature branch → dev → main
+
+
+Only the Project Lead merges code into main.
+
+
+--------------------------------------------------
+PULL REQUEST REQUIREMENTS
+--------------------------------------------------
+
+Every PR must include:
+
+- Description of the feature implemented
+- Files modified
+- Dataset updates (if any)
+- Example outputs
+
+Example commit message:
+
+feat: add verse segmentation for Charaka Samhita
+
+
+--------------------------------------------------
+INSTALLATION
+--------------------------------------------------
+
+Prerequisites:
+
+Python 3.10+  
+Git  
+
+
+Setup:
+
 git clone <repository-url>
+
 cd Sanskrit-LLM
 
-# 2. Create virtual environment
 python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
 
-# 3. Install dependencies
+source venv/bin/activate
+
 pip install -r requirements.txt
 
-# 4. (Optional) Download Sanskrit models
-# Transformers will be downloaded automatically when first used
-```
 
-## Usage Instructions
+--------------------------------------------------
+EXAMPLE USAGE
+--------------------------------------------------
 
-### Processing Sanskrit Text
+Sanskrit Tokenization Example:
 
-```python
 from src.sanskrit_processing import SanskritTokenizer
 
 tokenizer = SanskritTokenizer()
+
 tokens = tokenizer.tokenize("आयुर्वेदः सर्वदा रक्षति")
+
 print(tokens)
-```
 
-### Running Extraction Pipeline
 
-```python
+
+Treatment Extraction Example:
+
 from src.treatment_extraction import RuleBasedExtractor
-from src.symptom_extraction import KeywordExtractor
 
-# Initialize extractors
-treatment_extractor = RuleBasedExtractor()
-symptom_extractor = KeywordExtractor()
+extractor = RuleBasedExtractor()
 
-# Process text
-text = "कफप्रकोपः शीतले ज्वरे भवति"
-treatments = treatment_extractor.extract(text)
-symptoms = symptom_extractor.extract(text)
-```
+treatments = extractor.extract("ज्वरस्य कषाय पानं हितम्")
 
-### Running RAG Query
+print(treatments)
 
-```python
-from src.rag_pipeline import RAGQueryEngine
 
-engine = RAGQueryEngine()
+
+RAG Query Example:
+
+from src.rag_pipeline import RAGEngine
+
+engine = RAGEngine()
+
 answer = engine.query("What treatments are recommended for fever?")
+
 print(answer)
-```
 
-### Running Notebooks
 
-```bash
-jupyter notebook notebooks/data_exploration.ipynb
-```
 
-## Collaboration Resources
+--------------------------------------------------
+WEEKLY DELIVERABLES
+--------------------------------------------------
 
-| Resource | Link |
-|----------|------|
-| Research Document | [Google Docs - TBD] |
-| Task Tracker | [Notion - TBD] |
-| Project Slides | [TBD] |
-| Paper Draft | `paper/paper_draft.md` |
+Week 2
 
-## Contribution Guide
+Hemanth:
 
-### Branching Strategy
+verses_dataset.json  
+treatment_verse_candidates.json  
 
-```
-main                    # Stable, production-ready code
-├── dev                 # Integration branch for features
-│   ├── feature/hemanth     # Hemanth's feature branch
-│   └── feature/gowtham     # Gowtham's feature branch
-```
 
-### Branch Naming Conventions
-- `feature/<name>` - New features
-- `fix/<name>` - Bug fixes
-- `experiment/<name>` - Research experiments
-- `docs/<name>` - Documentation updates
+Gowtham:
 
-### Workflow
+disease_ontology.json  
+symptom_dataset.json  
 
-1. **Create Feature Branch**
-   ```bash
-   git checkout dev
-   git pull origin dev
-   git checkout -b feature/your-feature-name
-   ```
 
-2. **Implement Feature**
-   - Write code following PEP8 guidelines
-   - Add docstrings to all functions
-   - Include type hints where appropriate
 
-3. **Commit Changes**
-   ```bash
-   git add .
-   git commit -m "feat: add symptom extraction module"
-   ```
+--------------------------------------------------
+TEAM
+--------------------------------------------------
 
-4. **Open Pull Request**
-   - Push to remote: `git push origin feature/your-feature-name`
-   - Create PR against `dev` branch
-   - Fill in PR template with description
+Project Lead  
+Junior Research Associate  
 
-5. **Code Review**
-   - At least one approval required
-   - Address review comments
+Student Developer  
+Hemanth  
 
-6. **Merge into Dev**
-   - Squash commits if needed
-   - Delete feature branch after merge
+Student Developer  
+Gowtham  
 
-7. **Project Lead Merges to Main**
-   - Only project lead merges `dev` → `main`
-   - Requires passing tests
 
-### Code Style Rules
 
-- Python 3.10+ compliance
-- PEP8 formatting
-- All functions require docstrings
-- Use type hints where applicable
-- Maximum line length: 100 characters
+--------------------------------------------------
+LICENSE
+--------------------------------------------------
 
-## Team
+This project is intended for academic research and experimentation purposes.
 
-| Role | Name |
-|------|------|
-| Project Lead | [TBD] |
-| Junior Research Associate | [TBD] |
-| Student Developer | Hemanth |
-| Student Developer | Gowtham |
 
-## License
 
-This project is for research purposes. See LICENSE for details.
-
-## Citation
+--------------------------------------------------
+CITATION
+--------------------------------------------------
 
 If you use this work, please cite:
 
-```bibtex
-@misc{sanskrit-llm-2026,
-  title = {Ayurveda Sanskrit LLM},
-  author = {Hemanth, Gowtham, and Team},
-  year = {2026},
-  institution = {Research Institution}
+@misc{ayurveda_sanskrit_llm_2026,
+title = {Ayurveda Sanskrit LLM},
+author = {Research Team},
+year = {2026},
+institution = {Research Institution}
 }
-```

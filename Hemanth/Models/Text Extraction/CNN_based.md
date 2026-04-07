@@ -12,8 +12,16 @@ The core concept of this pipeline is **Convolutional Neural Network (CNN)** base
 ## How to Run
 1. Dependencies:
     pip install torch torchvision opencv-python pillow pdf2image tqdm
+
+   System (Linux):
+       sudo apt-get install poppler-utils
+
+   System (Windows):
+       Download poppler from https://github.com/oschwartz10612/poppler-windows/releases
+       Extract and add the bin/ folder to your PATH.
 2. Execution:
     python CNN_based.py input_file.pdf -o CNN_output.txt
+    python CNN_based.py input_file.pdf -o CNN_output.txt --start-page 5 --end-page 20
 
 ## Reference
 

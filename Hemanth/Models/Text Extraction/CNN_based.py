@@ -1,43 +1,5 @@
 """
 "A Systematic Framework for Sanskrit Character Recognition Using Deep Learning"
-
-Stages implemented exactly as described in Paper 6:
-  Stage 1 : Grayscale + Otsu binarization + noise removal
-  Stage 2 : Deskewing (Hough lines)
-  Stage 3 : Shirorekha (header line) detection and removal
-  Stage 4 : Line segmentation      (horizontal projection profile)
-  Stage 5 : Word segmentation      (vertical projection profile)
-  Stage 6 : Zone-based character segmentation  (median bisection + projection)
-  Stage 7 : CNN character classification       (trained on Devanagari dataset)
-  Stage 8 : Unicode assembly → .txt output
-
-Install:
-    pip install pdf2image opencv-python-headless torch torchvision tqdm Pillow numpy
-
-System (Linux):
-    sudo apt-get install poppler-utils
-
-System (Windows):
-    Download poppler from https://github.com/oschwartz10612/poppler-windows/releases
-    Extract and add the bin/ folder to your PATH.
-
-CNN model:
-    Paper trains a CNN on the Devanagari Character Dataset
-    (available at https://archive.ics.uci.edu/dataset/389/devanagari+handwritten+character+dataset
-     and the printed variant at https://www.kaggle.com/datasets/nikbearbrown/devanagari-character-dataset)
-
-    This script:
-      - Defines the exact CNN architecture from Paper 6 (3 conv blocks + 2 FC layers)
-      - Tries to load weights from  devanagari_cnn.pth  in the same folder
-      - If no weights file is found, it downloads a pretrained model from
-        a public HuggingFace repo (no large ByT5 — just a small CNN ~8 MB)
-      - Falls back to pure Tesseract OCR if PyTorch is not available
-
-Usage:
-    python sanskrit_ocr_paper6.py Sushrut_Sanhita.pdf -o output.txt
-    python sanskrit_ocr_paper6.py Sushrut_Sanhita.pdf -o output.txt --dpi 400
-    python sanskrit_ocr_paper6.py Sushrut_Sanhita.pdf -o output.txt --start-page 5 --end-page 20
-    python sanskrit_ocr_paper6.py Sushrut_Sanhita.pdf -o output.txt --tesseract-fallback
 """
 
 import os

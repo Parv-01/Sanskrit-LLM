@@ -1,3 +1,15 @@
+"""
+This script does the text layer extraction from OCR enabled sanskrit pdfs using PyMuPDF library.
+It allows user to define specific range for export into encoded text files.
+
+Installations:
+  pip install pymupdf
+
+Execution:
+    python ocr_enabled_txt_extraction.py
+"""
+
+
 import fitz  # PyMuPDF
 
 def extract_sanskrit_range(input_pdf, output_txt, start_page, end_page):
